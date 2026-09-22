@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CustomerRiskEvent",
+  "type": "object",
+  "properties": {
+    "event_id": { "type": "string" },
+    "customer_id": { "type": "string" },
+    "event_type": {
+      "type": "string",
+      "enum": ["risk_evaluated", "risk_escalated", "risk_cleared"]
+    },
+    "event_time": { "type": "string", "format": "date-time" },
+    "risk_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "risk_level": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "journey_state": {
+      "type": "string",
+      "enum": ["NORMAL", "AT_RISK", "HIGH_RISK", "RECOVERING", "RECOVERED", "LOST"]
+    },
+    "factors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signal": { "type": "string" },
+          "points": { "type": "integer" },
+          "description": { "type": "string" }
+        },
+        "required": ["signal", "points", "description"]
+      }
+    },
+    "primary_issue": { "type": "string" },
+    "detected_anomalies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommended_action": { "type": "string" },
+    "priority": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+    "source": { "type": "string", "default": "flink-risk-engine" }
+  },
+  "required": ["event_id", "customer_id", "event_type", "event_time", "risk_score", "risk_level"]
+}

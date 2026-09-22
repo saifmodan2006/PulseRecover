@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SystemAnomaly",
+  "type": "object",
+  "properties": {
+    "anomaly_id": { "type": "string" },
+    "anomaly_type": {
+      "type": "string",
+      "enum": [
+        "latency_spike",
+        "service_degraded",
+        "service_recovered",
+        "payment_failure_rate_anomaly",
+        "cart_abandonment_surge"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "metric_name": { "type": "string" },
+    "current_value": { "type": "number" },
+    "baseline_value": { "type": "number" },
+    "anomaly_score": { "type": "number" },
+    "affected_subsystem": { "type": "string" },
+    "detected_at": { "type": "string", "format": "date-time" },
+    "details": { "type": "string" }
+  },
+  "required": ["anomaly_id", "anomaly_type", "severity", "metric_name", "current_value", "detected_at"]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeliveryEvent",
+  "type": "object",
+  "properties": {
+    "event_id": { "type": "string" },
+    "customer_id": { "type": "string" },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "delivery_started",
+        "delivery_delayed",
+        "delivery_completed"
+      ]
+    },
+    "event_time": { "type": "string", "format": "date-time" },
+    "order_id": { "type": "string" },
+    "tracking_number": { "type": "string" },
+    "carrier": { "type": "string", "default": "BlueDart" },
+    "delay_minutes": { "type": "integer", "default": 0 },
+    "reason": { "type": "string" },
+    "source": { "type": "string", "default": "logistics-hub" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["event_id", "customer_id", "event_type", "event_time", "order_id"]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "PostgresCdcSourceV2_SupportTickets",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.PostgresCdcSourceV2",
+    "tasks.max": "1",
+    "connection.host": "${file:/secrets.properties:DB_HOST}",
+    "connection.port": "5432",
+    "connection.user": "${file:/secrets.properties:DB_USER}",
+    "connection.password": "${file:/secrets.properties:DB_PASSWORD}",
+    "connection.database": "pulsercover_db",
+    "table.include.list": "public.support_tickets,public.payments",
+    "slot.name": "pulsercover_cdc_slot",
+    "plugin.name": "pgoutput",
+    "publication.autocreate.mode": "filtered",
+    "tombstones.on.delete": "false",
+    "topic.prefix": "cdc-pg-",
+    "output.data.format": "JSON_SR",
+    "output.key.format": "JSON_SR",
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "cdc-dlq",
+    "errors.deadletterqueue.topic.replication.factor": "3"
+  }
+}

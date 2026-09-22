@@ -1,0 +1,19 @@
+{
+  "name": "HttpSinkV2_RecoveryActions",
+  "config": {
+    "connector.class": "io.confluent.connect.http.HttpSinkConnector",
+    "tasks.max": "1",
+    "topics": "recovery-actions",
+    "http.api.url": "${file:/secrets.properties:RECOVERY_API_URL}",
+    "request.method": "POST",
+    "headers": "Content-Type:application/json|X-Connector-Source:Confluent-Http-Sink-V2",
+    "batch.max.size": "1",
+    "retry.backoff.ms": "3000",
+    "max.retries": "5",
+    "behavior.on.error": "log",
+    "input.data.format": "JSON_SR",
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "recovery-actions-dlq",
+    "errors.deadletterqueue.topic.replication.factor": "3"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrderEvent",
+  "type": "object",
+  "properties": {
+    "event_id": { "type": "string" },
+    "customer_id": { "type": "string" },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "order_created",
+        "order_cancelled",
+        "order_completed"
+      ]
+    },
+    "event_time": { "type": "string", "format": "date-time" },
+    "session_id": { "type": "string" },
+    "order_id": { "type": "string" },
+    "items_count": { "type": "integer", "minimum": 1 },
+    "total_amount": { "type": "number", "minimum": 0 },
+    "currency": { "type": "string", "default": "INR" },
+    "status": { "type": "string" },
+    "source": { "type": "string", "default": "order-service" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["event_id", "customer_id", "event_type", "event_time", "order_id", "total_amount"]
+}

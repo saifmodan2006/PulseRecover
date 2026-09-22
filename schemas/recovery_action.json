@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecoveryAction",
+  "type": "object",
+  "properties": {
+    "action_id": { "type": "string" },
+    "customer_id": { "type": "string" },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_ASSISTANCE",
+        "PRIORITY_SUPPORT",
+        "DISCOUNT_OFFER",
+        "ALTERNATIVE_PAYMENT",
+        "DELIVERY_ESCALATION",
+        "CUSTOMER_NOTIFICATION"
+      ]
+    },
+    "trigger_event": { "type": "string" },
+    "priority": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "idempotency_key": { "type": "string" },
+    "reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "TRIGGERED", "SUCCESS", "FAILED"]
+    },
+    "payload": { "type": "object" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "executed_at": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "required": ["action_id", "customer_id", "action_type", "priority", "idempotency_key", "status"]
+}
